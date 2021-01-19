@@ -5,24 +5,32 @@ using namespace std;
 class B
 {
 public:
-	int i;
-	virtual void print_i() const { cout << i << "inside B" << endl; }//try it without virtual
+	inline virtual void foo(int i) { cout << i << "inside B" << endl; }
+	inline virtual void foo(double d) { cout << d << "inside B" << endl; }
 	B();
 	~B();
+
+private:
+
 };
 
-B::B(){
+B::B()
+{
 }
 
-B::~B(){
+B::~B()
+{
 }
 
 class D:public B
 {
 public:
-	void print_i() const { cout << i << "inside D" << endl; }
+	inline void foo(int i){ cout << i << "inside D" << endl; }
 	D();
 	~D();
+
+private:
+
 };
 
 D::D()
@@ -32,13 +40,12 @@ D::D()
 D::~D()
 {
 }
+
 int main() {
-	B b;
-	B* pb = &b;
-	D f;
-	f.i = 1 + (b.i = 1);
-	pb->print_i();
-	pb = &f;
-	pb->print_i();
+	D d;
+	B b, *pb = &d;
+	b.foo(9.5);
+	d.foo(9.5);
+	pb->foo(9.5);
 	return 0;
 }
