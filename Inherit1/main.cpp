@@ -1,11 +1,12 @@
 #include<iostream>
+#include<algorithm>
 
-using namespace std;
+//using namespace std;
 
 class Student{
 public:
 	enum year{FRESH, SOPH, JUNIOR, SENIOR, GRAD};
-	Student(char* nm, int id, double g, year x) :student_id(id), gpa(g), y(x) { copy_n(nm, 30, name); }
+	Student(char* nm, int id, double g, year x) :student_id(id), gpa(g), y(x) { std::copy_n(nm, 30, name); }
 	virtual void print() const;
 	~Student();
 
@@ -17,7 +18,7 @@ protected:
 };
 
 void Student::print() const{
-	cout << name << "," << student_id << "," << y << "," << gpa << endl;
+	std::cout << name << "," << student_id << "," << y << "," << gpa << std::endl;
 }
 
 Student::~Student()
@@ -28,8 +29,8 @@ class Grad_Student:public Student{
 public:
 	enum support {TA, RA, FELLOWSHIP, OTHER};
 	Grad_Student(char* nm, int id, double g, year x, support t, char* d, char* th):Student(nm, id, g, x), s(t){
-		copy_n(d, 10, dept);
-		copy_n(th, 80, thesis);}
+		std::copy_n(d, 10, dept);
+		std::copy_n(th, 80, thesis);}
 	void print() const;
 	~Grad_Student();
 
@@ -41,7 +42,7 @@ protected:
 };
 void Grad_Student::print() const{
 	Student::print();
-	cout << s << "," << dept << "," << thesis << endl;
+	std::cout << s << "," << dept << "," << thesis << std::endl;
 }
 
 Grad_Student::~Grad_Student(){
